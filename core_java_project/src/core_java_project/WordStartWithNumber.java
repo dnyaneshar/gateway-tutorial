@@ -7,29 +7,34 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.SpringApplication;
+
+import com.configserver2.ConfigServer2Application;
+
 public class WordStartWithNumber {
+	
+	class Student{
+		 String name;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+		 
+		 
+	}
 	
 	public static void main(String[] args) {
 		
-		String word = "3number";
+		List<Wheather> slist= new ArrayList<>();
+		slist.add(new Wheather(12.0));
+		slist.add(new Wheather(10.00));
+		slist.stream().map(Wheather::getTemp).sorted().forEach(System.out::println);
 		
-		if(word.matches("^[0-9].*")) {
-			System.out.println("word start with number");
-		} else
-		{
-			System.out.println("word did not start with number");
-		}
 		
-		List<String> list = Arrays.asList(word, "abcd", "5kyc");
-		
-		List<String> testList = list.stream().filter( new Predicate<String>() {
-			@Override
-			public boolean test(String t) {
-				return Pattern.matches("^[0-9].*", t);
-			}
-		}).collect(Collectors.toList());
-		
-		System.out.println(testList);
 	}
 
 }

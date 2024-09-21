@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: gcp-service
+
+
+gcp:
+ storage:
+   bucketName: test-bucket
