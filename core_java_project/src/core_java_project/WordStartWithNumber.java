@@ -1,15 +1,7 @@
 package core_java_project;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import org.springframework.boot.SpringApplication;
-
-import com.configserver2.ConfigServer2Application;
 
 public class WordStartWithNumber {
 	

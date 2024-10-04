@@ -1,7 +1,7 @@
 FROM openjdk:17
 EXPOSE 8080
-ADD target/spring-boot-docker.jar spring-boot-docker-pick.jar
-ENTRYPOINT [ "java", "-jar", "/spring-boot-docker-pick.jar" ]
+ADD target/task-management.jar task-management.jar
+ENTRYPOINT [ "java", "-jar", "/task-management.jar" ]
 
 #then go to docker workbench portal in yout machine 
 # then go to prokect home dir, (.) is root folder

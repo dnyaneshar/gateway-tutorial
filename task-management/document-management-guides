@@ -1,0 +1,26 @@
+Post API : 
+
+URL : localhost:8080/tasks
+Payload: 
+
+{
+"id":1,
+"title": "create api -1 ",
+"description":"create backend apis -1",
+"taskStatus":"PENDING"
+}
+
+
+Get API
+localhost:8080/tasks/1
+
+
+-> Put API:
+URL : localhost:8080/tasks/1
+{
+    "id": 1,
+    "title": "create api -1 ",
+    "description": "create backend apis -1",
+    "date": null,
+    "taskStatus": "PENDING"
+}
