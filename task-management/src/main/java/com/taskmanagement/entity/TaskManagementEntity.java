@@ -26,7 +26,7 @@ public class TaskManagementEntity {
 	private long id;
 	
 	@NotBlank(message = "Title is mandatory")
-	@Size(min = 5, max = 20)
+	@Size(min = 5, max = 50)
 	private String title;
 	
 	@Size(min = 50, max = 500)

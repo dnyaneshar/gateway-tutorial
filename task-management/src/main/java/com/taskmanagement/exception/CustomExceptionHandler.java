@@ -1,21 +1,22 @@
-package exception;
+package com.taskmanagement.exception;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class CustomExceptionHandler {
 
 	@ExceptionHandler(ConstraintViolationException.class)
@@ -40,6 +41,23 @@ public class CustomExceptionHandler {
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.add(new Error(error.getField(), error.getDefaultMessage()));
         }
+        ErrorResponse response = new ErrorResponse(errors);
+        return ResponseEntity.badRequest().body(response);
+    }
+	
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        List<Error> errors = new ArrayList<>();
+        
+        if(ex.getCause() instanceof BindException) {
+        	BindException bindException = (BindException) ex.getCause();
+        	for (FieldError error : bindException.getBindingResult().getFieldErrors()) {
+                errors.add(new Error(error.getField(), error.getDefaultMessage()));
+            }
+        } else {
+        	errors.add(new Error("status", ex.getLocalizedMessage()));
+        }
+        
         ErrorResponse response = new ErrorResponse(errors);
         return ResponseEntity.badRequest().body(response);
     }

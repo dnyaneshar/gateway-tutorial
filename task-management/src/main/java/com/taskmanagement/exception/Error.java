@@ -1,4 +1,4 @@
-package exception;
+package com.taskmanagement.exception;
 
 public class Error {
 
