@@ -5,9 +5,10 @@ Payload:
 
 {
 "id":1,
-"title": "create api -1 ",
-"description":"create backend apis -1",
-"taskStatus":"PENDING"
+"title": "javascript code writing" ,
+"dueDate":"2025-10-05",
+"description":"javascript coding test case writng",
+"taskStatus":"COMPLETED"
 }
 
 
@@ -18,9 +19,9 @@ localhost:8080/tasks/1
 -> Put API:
 URL : localhost:8080/tasks/1
 {
-    "id": 1,
-    "title": "create api -1 ",
-    "description": "create backend apis -1",
-    "date": null,
-    "taskStatus": "PENDING"
+"id":1,
+"title": "javascript code writing" ,
+"dueDate":"2025-10-05",
+"description":"javascript coding test case writng",
+"taskStatus":"COMPLETED"
 }

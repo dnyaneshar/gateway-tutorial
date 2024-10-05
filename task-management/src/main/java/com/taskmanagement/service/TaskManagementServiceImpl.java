@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.taskmanagement.constant.TaskStatus;
 import com.taskmanagement.entity.TaskManagementEntity;
 
 @Service
@@ -40,7 +41,7 @@ public class TaskManagementServiceImpl implements TaskManagementService {
 		
 		String desc =  newEntity.getDescription() ;
 		String title = newEntity.getTitle();
-		String status = newEntity.getTaskStatus();
+		TaskStatus status = newEntity.getTaskStatus();
 		
 		if( StringUtils.hasText(desc)) {
 			oldEntity.setDescription(desc);
@@ -50,7 +51,7 @@ public class TaskManagementServiceImpl implements TaskManagementService {
 			oldEntity.setTitle(title);
 		}
 		
-		if(  StringUtils.hasText(status)) {
+		if(  StringUtils.hasText(status.name())) {
 			oldEntity.setTaskStatus(status);
 		} 
 	}

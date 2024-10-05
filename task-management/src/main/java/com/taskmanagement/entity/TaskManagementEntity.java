@@ -2,6 +2,13 @@ package com.taskmanagement.entity;
 
 import java.time.LocalDate;
 
+import com.taskmanagement.constant.TaskStatus;
+import com.taskmanagement.validation.CustomDateConstraint;
+import com.taskmanagement.validation.StatusValidator;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +20,24 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Valid
 public class TaskManagementEntity {
+	
 	private long id;
+	
+	@NotBlank(message = "Title is mandatory")
+	@Size(min = 5, max = 20)
 	private String title;
+	
+	@Size(min = 50, max = 500)
+	@NotBlank(message = "Description is mandatory")
 	private String description;
-	private LocalDate date;
-	private String taskStatus;
+	
+	@CustomDateConstraint
+	private LocalDate dueDate;
+	
+	@StatusValidator(enumClazz = TaskStatus.class)
+	private TaskStatus taskStatus;
 	
 	public long getId() {
 		return id;
@@ -38,17 +57,18 @@ public class TaskManagementEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public LocalDate getDate() {
-		return date;
-	}
-	public void setDate(LocalDate date) {
-		this.date = LocalDate.now();
-	}
-	public String getTaskStatus() {
+	
+	public TaskStatus getTaskStatus() {
 		return taskStatus;
 	}
-	public void setTaskStatus(String taskStatus) {
+	public void setTaskStatus(TaskStatus taskStatus) {
 		this.taskStatus = taskStatus;
+	}
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
 	}
 	
 }

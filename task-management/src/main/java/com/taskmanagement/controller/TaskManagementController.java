@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.taskmanagement.entity.TaskManagementEntity;
 import com.taskmanagement.service.TaskManagementService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("tasks")
 public class TaskManagementController {
@@ -24,7 +26,7 @@ public class TaskManagementController {
 	private TaskManagementService taskManagmentService;
 
 	@PostMapping
-	public ResponseEntity<TaskManagementEntity> create(@RequestBody TaskManagementEntity entity){
+	public ResponseEntity<TaskManagementEntity> create(@Valid @RequestBody TaskManagementEntity entity){
 		TaskManagementEntity createdEntity = taskManagmentService.create(entity);
 		return ResponseEntity.ok(createdEntity);
 	}
