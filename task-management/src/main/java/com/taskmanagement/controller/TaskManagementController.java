@@ -54,7 +54,7 @@ public class TaskManagementController {
 	@PostMapping("/filter")
 	public ResponseEntity<List<TaskManagementEntity>> 
 					getAllByFilter(@RequestBody FilterTask filterTask){
-		List<TaskManagementEntity> filteredTask = taskManagmentService.filterTask(filterTask);
+		List<TaskManagementEntity> filteredTask = taskManagmentService.filterTaskByStatusAndDate(filterTask);
 		return ResponseEntity.ok(filteredTask);
 	}
 	

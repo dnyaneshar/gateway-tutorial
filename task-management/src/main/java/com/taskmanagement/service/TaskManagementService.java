@@ -17,5 +17,5 @@ public interface TaskManagementService {
 	
 	List<TaskManagementEntity> readAll();
 
-	List<TaskManagementEntity> filterTask(FilterTask filterTask);
+	List<TaskManagementEntity> filterTaskByStatusAndDate(FilterTask filterTask);
 }

@@ -74,24 +74,16 @@ public class TaskManagementServiceImpl<taskManagmentEnties> implements TaskManag
 	}
 
 	@Override
-	public List<TaskManagementEntity> filterTask(FilterTask filter) {
+	public List<TaskManagementEntity> filterTaskByStatusAndDate(FilterTask filter) {
 		
 		if(taskManagmentEnties.isEmpty()) return Collections.emptyList();
 
 		LocalDate startDate = filter.getStartDate();
 		LocalDate endDate = filter.getEndDate();
 		
-		Predicate<TaskManagementEntity> isBefore = (entity) -> 
-		(Objects.nonNull(entity.getDueDate()) && endDate != null) 
-				&& entity.getDueDate().isBefore( endDate );
-		
-		Predicate<TaskManagementEntity> isAfter = (entity ) -> 
-		 	Objects.nonNull(endDate) && entity.getDueDate().isAfter(startDate);
-		
 		return taskManagmentEnties.values().stream()
-		.filter(p -> filter.getStatuses().contains(p.getTaskStatus()))
-		.filter(isBefore)
-		.filter(isAfter)
+		.filter(p -> filter.getStatuses().contains(p.getTaskStatus()) 
+				&& p.getDueDate().isBefore( endDate ) && p.getDueDate().isAfter( startDate ))
 				.collect(Collectors.toList());
 
 	}
