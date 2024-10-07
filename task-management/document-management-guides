@@ -25,3 +25,11 @@ URL : localhost:8080/tasks/1
 "description":"javascript coding test case writng",
 "taskStatus":"COMPLETED"
 }
+
+#get document by filter payload
+POST : localhost:8000/tasks/filter
+{
+"startDate":"2025-10-04",
+"endDate":"2025-10-12",
+"statuses":["INPROGRESS", "COMPLETED"]
+}

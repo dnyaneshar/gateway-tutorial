@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.taskmanagement.entity.TaskManagementEntity;
+import com.taskmanagement.pojo.FilterTask;
 import com.taskmanagement.service.TaskManagementService;
 
 import jakarta.validation.Valid;
@@ -48,6 +50,14 @@ public class TaskManagementController {
 		TaskManagementEntity updated = taskManagmentService.update(id, entity);
 		return ResponseEntity.ok(updated);
 	}
+	
+	@PostMapping("/filter")
+	public ResponseEntity<List<TaskManagementEntity>> 
+					getAllByFilter(@RequestBody FilterTask filterTask){
+		List<TaskManagementEntity> filteredTask = taskManagmentService.filterTask(filterTask);
+		return ResponseEntity.ok(filteredTask);
+	}
+	
 	
 	
 }

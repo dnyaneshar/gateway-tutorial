@@ -1,22 +1,28 @@
 package com.taskmanagement.service;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.taskmanagement.constant.TaskStatus;
 import com.taskmanagement.entity.TaskManagementEntity;
+import com.taskmanagement.pojo.FilterTask;
 
 @Service
-public class TaskManagementServiceImpl implements TaskManagementService {
+public class TaskManagementServiceImpl<taskManagmentEnties> implements TaskManagementService {
 
-	
+
 	Map<Long, TaskManagementEntity> taskManagmentEnties = new HashMap<>();
-	
+
 	@Override
 	public TaskManagementEntity create(TaskManagementEntity entity) {
 		taskManagmentEnties.put(entity.getId(), entity);
@@ -35,22 +41,22 @@ public class TaskManagementServiceImpl implements TaskManagementService {
 		taskManagmentEnties.put(id, oldEntity);
 		return oldEntity;
 	}
-	
+
 	private void updateTask(Long id, TaskManagementEntity newEntity,
 			TaskManagementEntity oldEntity) {
-		
+
 		String desc =  newEntity.getDescription() ;
 		String title = newEntity.getTitle();
 		TaskStatus status = newEntity.getTaskStatus();
-		
+
 		if( StringUtils.hasText(desc)) {
 			oldEntity.setDescription(desc);
 		}
-		
+
 		if(  StringUtils.hasText(title)) {
 			oldEntity.setTitle(title);
 		}
-		
+
 		if(  StringUtils.hasText(status.name())) {
 			oldEntity.setTaskStatus(status);
 		} 
@@ -67,5 +73,27 @@ public class TaskManagementServiceImpl implements TaskManagementService {
 		return taskManagmentEnties.values().stream().collect(Collectors.toList());
 	}
 
-	
+	@Override
+	public List<TaskManagementEntity> filterTask(FilterTask filter) {
+		
+		if(taskManagmentEnties.isEmpty()) return Collections.emptyList();
+
+		LocalDate startDate = filter.getStartDate();
+		LocalDate endDate = filter.getEndDate();
+		
+		Predicate<TaskManagementEntity> isBefore = (entity) -> 
+		(Objects.nonNull(entity.getDueDate()) && endDate != null) 
+				&& entity.getDueDate().isBefore( endDate );
+		
+		Predicate<TaskManagementEntity> isAfter = (entity ) -> 
+		 	Objects.nonNull(endDate) && entity.getDueDate().isAfter(startDate);
+		
+		return taskManagmentEnties.values().stream()
+		.filter(p -> filter.getStatuses().contains(p.getTaskStatus()))
+		.filter(isBefore)
+		.filter(isAfter)
+				.collect(Collectors.toList());
+
+	}
+
 }
