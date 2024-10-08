@@ -11,7 +11,7 @@ import com.taskmanagement.entity.UserInfo;
 import com.taskmanagement.pojo.UserLogin;
 
 @Service
-public class UserLoginRepoImpl implements UserLoginRepository{
+public class UserLoginRepoImpl {
 	
 	static List<UserInfo> users = new ArrayList<>();
 	
@@ -35,7 +35,7 @@ public class UserLoginRepoImpl implements UserLoginRepository{
 	}
 	
 	//find user by username (email)
-	@Override
+	//@Override
 	public UserInfo findByUserLoginName(String username) {
 		return users.stream().filter(user -> user.getEmail()
 				.equals(username)).findFirst().get();

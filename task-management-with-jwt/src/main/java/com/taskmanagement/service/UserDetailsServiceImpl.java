@@ -1,6 +1,5 @@
 package com.taskmanagement.service;
 
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +9,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.taskmanagement.dao.UserLoginRepository;
 import com.taskmanagement.entity.UserInfo;
+import com.taskmanagement.repository.UserRepositoy;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private UserLoginRepository userLoginRepository;
+	private UserRepositoy userRepositoy;
 	
     public UserDetailsServiceImpl() {}
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserInfo userInfo = userLoginRepository.findByUserLoginName(username);
+        UserInfo userInfo = userRepositoy.findByEmail(username);
         if (userInfo == null) {
             throw new UsernameNotFoundException("User not found with email id: " + username);
         }

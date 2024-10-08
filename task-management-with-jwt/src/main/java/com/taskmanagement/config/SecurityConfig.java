@@ -38,7 +38,7 @@ public class SecurityConfig {
 		System.out.println("Custom Security Configuration is applied!");
 
 		http.csrf(csrf -> csrf.disable())
-		.authorizeHttpRequests(auth -> auth.requestMatchers("/login/generateToken").permitAll()
+		.authorizeHttpRequests(auth -> auth.requestMatchers("/login/generateToken", "/user/signup").permitAll()
 				.requestMatchers("/tasks/**").authenticated()
 
 				).authenticationProvider( authenticationProvider() )

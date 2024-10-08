@@ -2,19 +2,15 @@ package com.taskmanagement.entity;
 
 import java.util.List;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Data
-@Getter
-@Setter
-@ToString
-@Builder
+@Document(collation = "UserInfo")
 public class UserInfo {
-	private Long id;
+	
+	@MongoId(targetType = FieldType.OBJECT_ID)
+	private String id;
 	private String firstName;
 	private String lastName;
 	private String middelName;
@@ -22,10 +18,11 @@ public class UserInfo {
 	private String password;
 	private List<String> authorities;
 	
-	public Long getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getFirstName() {
