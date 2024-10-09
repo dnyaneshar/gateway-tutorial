@@ -40,7 +40,7 @@ public class TaskManagementController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<TaskManagementEntity> get(@PathVariable Long id){
+	public ResponseEntity<TaskManagementEntity> get(@PathVariable String id){
 		TaskManagementEntity createdEntity = taskManagmentService.findById(id);
 		return ResponseEntity.ok(createdEntity);
 	}
@@ -52,7 +52,7 @@ public class TaskManagementController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<TaskManagementEntity> update(@PathVariable Long id, @RequestBody TaskManagementEntity entity){
+	public ResponseEntity<TaskManagementEntity> update(@PathVariable String id, @RequestBody TaskManagementEntity entity){
 		TaskManagementEntity updated = taskManagmentService.update(id, entity);
 		return ResponseEntity.ok(updated);
 	}
