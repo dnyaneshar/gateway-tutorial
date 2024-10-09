@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Document(collation = "UserInfo")
+@Document(value = "UserInfo")
 public class UserInfo {
 	
 	@MongoId(targetType = FieldType.OBJECT_ID)

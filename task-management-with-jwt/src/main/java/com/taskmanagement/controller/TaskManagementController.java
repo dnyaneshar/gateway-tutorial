@@ -41,13 +41,13 @@ public class TaskManagementController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<TaskManagementEntity> get(@PathVariable Long id){
-		TaskManagementEntity createdEntity = taskManagmentService.read(id);
+		TaskManagementEntity createdEntity = taskManagmentService.findById(id);
 		return ResponseEntity.ok(createdEntity);
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<TaskManagementEntity>> getAll(){
-		List<TaskManagementEntity> allTasks = taskManagmentService.readAll();
+		List<TaskManagementEntity> allTasks = taskManagmentService.findAll();
 		return ResponseEntity.ok(allTasks);
 	}
 	

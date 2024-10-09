@@ -2,6 +2,10 @@ package com.taskmanagement.entity;
 
 import java.time.LocalDate;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
 import com.taskmanagement.constant.TaskStatus;
 import com.taskmanagement.validation.CustomDateConstraint;
 import com.taskmanagement.validation.StatusValidator;
@@ -20,10 +24,11 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Valid
+@Document(value = "TaskManagement")
 public class TaskManagementEntity {
 	
-	private long id;
+	@MongoId(targetType = FieldType.OBJECT_ID)
+	private String id;
 	
 	@NotBlank(message = "Title is mandatory")
 	@Size(min = 5, max = 50)
@@ -39,10 +44,11 @@ public class TaskManagementEntity {
 	@StatusValidator(enumClazz = TaskStatus.class)
 	private TaskStatus taskStatus;
 	
-	public long getId() {
+
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTitle() {

@@ -9,13 +9,13 @@ public interface TaskManagementService {
 
 	TaskManagementEntity create(TaskManagementEntity entity);
 	
-	TaskManagementEntity read(Long id);
+	TaskManagementEntity findById(String id);
 	
-	TaskManagementEntity update(Long id, TaskManagementEntity entity);
+	TaskManagementEntity update(String id, TaskManagementEntity entity);
 	
-	String delete(Long id);
+	String delete(String id);
 	
-	List<TaskManagementEntity> readAll();
+	List<TaskManagementEntity> findAll();
 
 	List<TaskManagementEntity> filterTaskByStatusAndDate(FilterTask filterTask);
 }
